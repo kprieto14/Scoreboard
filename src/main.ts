@@ -2,15 +2,25 @@ import './style.css'
 let teamOneScore = 0;
 let teamTwoScore = 0; 
 
+let teamOneNumberHeader = document.querySelector('h3.team-one')
+let teamTwoNumberHeader = document.querySelector('h3.team-two')
+
+let teamOneName = document.querySelector('h2.team-one')
+let teamTwoName = document.querySelector('h2.team-two')
+
+let welcomeHeader = document.querySelector('h1')
+
 //Selects all the selected elements in the DOM
-const icons = document.querySelectorAll('i')
-const teamNameForm = document.querySelectorAll('input')
+const sections = document.querySelectorAll('section')
 
 function mathScores(event: MouseEvent) {
     const iconClickedOn = event.target;
 
-    let teamOneNumberHeader = document.querySelector('h3.team-one')
-    let teamTwoNumberHeader = document.querySelector('h3.team-two')
+    //Checks if either team is already at 21 to stop counter
+    if(teamOneScore === 21 || teamTwoScore === 21) {
+        console.log('Nope')
+        return
+    }
 
     //Double checks the event clicked on is not NULL
     if(iconClickedOn instanceof HTMLElement) {
@@ -42,14 +52,14 @@ function mathScores(event: MouseEvent) {
         if(teamTwoNumberHeader instanceof HTMLHeadingElement) {
             teamTwoNumberHeader.textContent = `${teamTwoScore}`
         }
+
+        //Constantly checks to see if it should congratulate teams
+        victoryScreech()
     }
 }
 
 function changeName(event: Event) {
     const inputTyped = event.target;
-
-    let teamOneName = document.querySelector('h2.team-one')
-    let teamTwoName = document.querySelector('h2.team-two')
 
     if(inputTyped instanceof HTMLInputElement) {
         if(inputTyped.classList.contains('team-one')) {
@@ -65,8 +75,41 @@ function changeName(event: Event) {
     }
 }
 
+function resetScores() {
+    teamOneScore = 0
+    teamTwoScore = 0
+
+    if(teamOneNumberHeader instanceof HTMLHeadingElement) {
+        teamOneNumberHeader.textContent = `${teamOneScore}`
+    }
+
+    if(teamTwoNumberHeader instanceof HTMLHeadingElement) {
+        teamTwoNumberHeader.textContent = `${teamTwoScore}`
+    }
+
+    if(welcomeHeader instanceof HTMLHeadingElement) {
+        welcomeHeader.textContent = 'Welcome to my Scoreboard!'
+    }
+}
+
+function victoryScreech() {
+    if(teamOneScore === 21) {
+        if(welcomeHeader instanceof HTMLHeadingElement) {
+            welcomeHeader.textContent = `🎉 Congratulations ${teamOneName?.innerHTML}! 🎉 `
+        }
+    }
+    else if(teamTwoScore === 21) {
+        if(welcomeHeader instanceof HTMLHeadingElement) {
+            welcomeHeader.textContent = `🎉 Congratulations ${teamTwoName?.innerHTML}! 🎉 `
+        }
+    }
+}
+
 //When an icon is clicked on, it will add/ subtract scores as needed
-icons.forEach((icon) => icon.addEventListener('click', mathScores))
+sections.forEach((icon) => icon.addEventListener('click', mathScores))
 
 //When either input form is used, will change their names accordingly
-teamNameForm.forEach((teamName => teamName.addEventListener('input', changeName)))
+sections.forEach((teamName => teamName.addEventListener('input', changeName)))
+
+//When reset button is clicked, will reset all scores
+document.getElementById('reset-button')?.addEventListener('click', resetScores)
