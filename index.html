@@ -1,13 +1,48 @@
 <!DOCTYPE html>
-<html lang="en">
-  <head>
+<html>
+  <head lang="en">
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Template</title>
+    <title>Scoreboard</title>
+    <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.0-2/css/all.min.css"
+      rel="stylesheet"
+    />
   </head>
   <body>
-    <script type="module" src="/src/main.ts"></script>
-    <p>Hello, World</p>
+    <header>
+      <h1>My Score Board</h1>
+    </header>
+
+    <main>
+      <section class="team1">
+        <h2 class="team-one">Team 1</h2>
+        <h3 class="team-one">0</h3>
+        <fieldset>
+          <input type="text" placeholder="Name" class="team-one"/>
+        </fieldset>
+
+        <fieldset>
+          <i class="add fas fa-2x fa-plus-circle team-one"></i>
+          <i class="subtract fas fa-2x fa-minus-circle team-one"></i>
+        </fieldset>
+      </section>
+
+      <section class="team2">
+        <h2 class="team-two">Team 2</h2>
+        <h3 class="team-two">0</h3>
+        <fieldset>
+          <input type="text" placeholder="Name" class="team-two"/>
+        </fieldset>
+
+        <fieldset>
+          <i class="add fas fa-2x fa-plus-circle team-two"></i>
+          <i class="subtract fas fa-2x fa-minus-circle team-two"></i>
+        </fieldset>
+      </section>
+    </main>
+
+    <script type="module" src="/src/main.ts" charset="utf-8"></script>
   </body>
 </html>
